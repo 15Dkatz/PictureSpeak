@@ -5,10 +5,13 @@ import {
   Dimensions,
   TouchableOpacity,
   StyleSheet,
-  NativeModules
+  NativeModules,
+  Image
 } from 'react-native';
 
 // allow multiple by making the name of their pictures unique!
+let Speech = require('react-native-speech');
+
 
 import Camera from 'react-native-camera';
 var RNUploader = require('NativeModules').RNUploader;
@@ -18,7 +21,7 @@ const config = {
     apiKey: "AIzaSyCa1TSayY_Fqn9nrTXU8WqVwQSjdBF5haQ",
     authDomain: "pspeakapp.firebaseapp.com",
     databaseURL: "https://pspeakapp.firebaseio.com",
-    storageBucket: "",
+    storageBucket: ""
 };
 const firebaseApp = firebase.initializeApp(config);
 const textRef = firebase.database().ref();
@@ -27,7 +30,8 @@ module.exports = React.createClass({
   getInitialState() {
     return ({
       title: 'PictureSpeak',
-      text: 'Hear your picture!'
+      text: 'Hear your picture!',
+      speaking: false
     })
   },
 
@@ -35,10 +39,38 @@ module.exports = React.createClass({
     this.listenForItems(textRef);
   },
 
+  _startHandler(text) {
+    Speech.speak({
+      text,
+      voice: 'en-US'
+    }).then(started => {
+      console.log('Speech started');
+      this.setState({speaking: true});
+    }).catch(error => {
+      console.log('You have already started a speech instance');
+    })
+  },
+
+  _pauseHandler() {
+    Speech.pause();
+    this.setState({speaking: false});
+  },
+
+  _resumeHandler() {
+    Speech.resume();
+    this.setState({speaking: true});
+  },
+
+  _stopHandler() {
+    Speech.stop();
+    this.setState({speaking: false});
+  },
+
   listenForItems(ref) {
     console.log('listening for items!');
     ref.on('child_changed', (snap) => {
       let text = snap.val();
+      this._startHandler(text);
       this.setState({text});
     })
   },
@@ -54,12 +86,23 @@ module.exports = React.createClass({
           keepAwake={true}
           aspect={Camera.constants.Aspect.fill}
         >
-          <Text style={styles.text}>
+          {/*<Text style={styles.text}>
             {this.state.text}
-          </Text>
-          <TouchableOpacity style={styles.capture} onPress={()=>this.takePicture()}>
-            <Text style={styles.captureText}>SPEAK</Text>
-          </TouchableOpacity>
+          </Text>*/}
+          <View style={styles.buttonsView}>
+            <TouchableOpacity style={styles.sideButton}>
+              <Image source={require('../resources/settings_icon.png')} style={{width: 40, height: 40}}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.capture} onPress={()=>this.takePicture()}>
+              <Text style={styles.captureText}>SPEAK</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.sideButton, styles.pauseButton]}
+              onPress={this.state.speaking ? () => this._pauseHandler : () => this._resumeHandler}
+            >
+              <Text style={styles.sideButtonText}>&#10073;&#10073;</Text>
+            </TouchableOpacity>
+          </View>
         </Camera>
       </View>
     )
@@ -108,7 +151,9 @@ const styles = StyleSheet.create({
   capture: {
     width: 100,
     height: 100,
-    backgroundColor: '#fff',
+    backgroundColor: '#a5d6a7',
+    borderColor: '#000',
+    borderWidth: 10,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 50,
@@ -117,17 +162,48 @@ const styles = StyleSheet.create({
   captureText: {
     textAlign: 'center',
     color: '#000',
-    padding: 10,
+    // padding: 10,
     fontWeight: 'bold',
     fontSize: 18
   },
-  text: {
-    color: '#222', //change to black
+
+  pauseButton: {
+    backgroundColor: '#ef9a9a',
+  },
+  // text: {
+  //   color: '#222', //change to black
+  //   textAlign: 'center',
+  //   padding: 10,
+  //   marginBottom: 100,
+  //   fontSize: 24,
+  //   backgroundColor: 'transparent'
+  //   // marginBottom: 50
+  // }
+
+  //*** BUTTONS *** //
+  buttonsView: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    flex: 1,
+
+    justifyContent: 'center',
+  },
+  sideButton: {
+    // flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    backgroundColor: '#e0e0e0',
+    margin: 10,
+    marginLeft: 23,
+    marginRight: 23,
+    borderColor: '#000',
+    borderWidth: 5,
+  },
+  sideButtonText: {
     textAlign: 'center',
-    padding: 10,
-    marginBottom: 100,
-    fontSize: 24,
-    backgroundColor: 'transparent'
-    // marginBottom: 50
+    fontWeight: 'bold'
   }
 })

@@ -23,6 +23,7 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		18B8B1ECC9AE450BBCE7F4FF /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 429431B2707147B190FA85AC /* libRCTCamera.a */; };
+		2C5D7105299844DB8BC9BE6F /* libSpeechSynthesizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA461E183EBA46919A327C7E /* libSpeechSynthesizer.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		861871CAA940481BAD472122 /* libRNUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 063AE1282ECF4502A6E9A179 /* libRNUploader.a */; };
 		F67510651D8437D6002D0141 /* RCTCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = F67510641D8437D6002D0141 /* RCTCustom.m */; };
@@ -107,6 +108,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		F60CF6491D849BE700A3AB12 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43B09B322E5A43DFB8B5FD24 /* SpeechSynthesizer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = SpeechSynthesizer;
+		};
 		F635F5FE1D8425F7005FCA32 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C3E0BBF0CC6849F083A964E8 /* RNUploader.xcodeproj */;
@@ -146,9 +154,11 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PictureSpeak/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		429431B2707147B190FA85AC /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
+		43B09B322E5A43DFB8B5FD24 /* SpeechSynthesizer.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SpeechSynthesizer.xcodeproj; path = "../node_modules/react-native-speech/SpeechSynthesizer.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		C3E0BBF0CC6849F083A964E8 /* RNUploader.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNUploader.xcodeproj; path = "../node_modules/react-native-uploader/RNUploader/RNUploader.xcodeproj"; sourceTree = "<group>"; };
+		DA461E183EBA46919A327C7E /* libSpeechSynthesizer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSpeechSynthesizer.a; sourceTree = "<group>"; };
 		F67510641D8437D6002D0141 /* RCTCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTCustom.m; sourceTree = "<group>"; };
 		F6D7887D1D83D27400725057 /* FileUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileUpload.m; path = "../node_modules/react-native-file-upload/FileUpload.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,6 +188,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				18B8B1ECC9AE450BBCE7F4FF /* libRCTCamera.a in Frameworks */,
 				861871CAA940481BAD472122 /* libRNUploader.a in Frameworks */,
+				2C5D7105299844DB8BC9BE6F /* libSpeechSynthesizer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +315,7 @@
 				0674CCBA757243B2BF31C27F /* RCTCamera.xcodeproj */,
 				C3E0BBF0CC6849F083A964E8 /* RNUploader.xcodeproj */,
 				F67510641D8437D6002D0141 /* RCTCustom.m */,
+				43B09B322E5A43DFB8B5FD24 /* SpeechSynthesizer.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -333,6 +345,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* PictureSpeak.app */,
 				00E356EE1AD99517003FC87E /* PictureSpeakTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F60CF63A1D849BE700A3AB12 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F60CF64A1D849BE700A3AB12 /* libSpeechSynthesizer.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -467,6 +487,10 @@
 					ProductGroup = F635F5EF1D8425F7005FCA32 /* Products */;
 					ProjectRef = C3E0BBF0CC6849F083A964E8 /* RNUploader.xcodeproj */;
 				},
+				{
+					ProductGroup = F60CF63A1D849BE700A3AB12 /* Products */;
+					ProjectRef = 43B09B322E5A43DFB8B5FD24 /* SpeechSynthesizer.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -545,6 +569,13 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F60CF64A1D849BE700A3AB12 /* libSpeechSynthesizer.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSpeechSynthesizer.a;
+			remoteRef = F60CF6491D849BE700A3AB12 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F635F5FF1D8425F7005FCA32 /* libRNUploader.a */ = {
@@ -657,6 +688,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PictureSpeak.app/PictureSpeak";
@@ -675,6 +707,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PictureSpeak.app/PictureSpeak";
@@ -691,6 +724,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-speech",
 				);
 				INFOPLIST_FILE = PictureSpeak/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -713,6 +747,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-speech",
 				);
 				INFOPLIST_FILE = PictureSpeak/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -765,6 +800,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-speech",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -806,6 +842,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-speech",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

@@ -11,6 +11,7 @@
     "react-native": "0.33.0",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-file-upload": "^1.0.4",
+    "react-native-speech": "^0.1.2",
     "react-native-uploader": "0.0.9",
     "restler": "^3.4.0"
   }

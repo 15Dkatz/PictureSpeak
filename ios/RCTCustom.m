@@ -26,7 +26,7 @@ RCT_EXPORT_METHOD(readImage:(NSString *)input callback:(RCTResponseSenderBlock)c
     ALAssetRepresentation *rep = [asset defaultRepresentation];
     CGImageRef imageRef = [rep fullScreenImage];
 
-    // Create UIImageJPEGRepresentation from CGImageRef
+    // Create UIImageJPEGRepresentation from CGIm ageRef
     NSData *imageData = UIImageJPEGRepresentation([UIImage imageWithCGImage:imageRef], 1.0);
     
     // Convert to base64 encoded string
