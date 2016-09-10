@@ -37,12 +37,8 @@ module.exports = React.createClass({
 
   listenForItems(ref) {
     console.log('listening for items!');
-    ref.on('value', (snap) => {
-      console.log('recognizing a change!');
-      let text = '';
-      snap.forEach(textSample => {
-        text = textSample.val().text;
-      })
+    ref.on('child_changed', (snap) => {
+      let text = snap.val();
       this.setState({text});
     })
   },
@@ -70,18 +66,20 @@ module.exports = React.createClass({
   },
 
   takePicture() {
+    //remember to reset the default to Hear your Picture on Firebase!
+
     this.camera.capture()
       .then((data) => {
         let pathToPic = data.path;
         NativeModules.ReadImageData.readImage(pathToPic, image => {
-          console.log('image', image);
+          // console.log('image', image);
           let file = JSON.stringify({
             file: 'file',
             filename: 'photo.jpeg',
             base64: image,
             filetype: 'image/jpeg'
           })
-          fetch('https://pspeak2.herokuapp.com/convert', {
+          fetch('https://pspeak.herokuapp.com/convert', {
           // fetch('http://localhost:3000/convert', {
             method: 'POST',
             headers: {
