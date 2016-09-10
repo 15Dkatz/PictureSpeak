@@ -8,21 +8,48 @@ import {
   NativeModules
 } from 'react-native';
 
+// allow multiple by making the name of their pictures unique!
+
 import Camera from 'react-native-camera';
-// let FileUpload = require('NativeModules').FileUpload;
 var RNUploader = require('NativeModules').RNUploader;
+
+import * as firebase from 'firebase';
+const config = {
+    apiKey: "AIzaSyCa1TSayY_Fqn9nrTXU8WqVwQSjdBF5haQ",
+    authDomain: "pspeakapp.firebaseapp.com",
+    databaseURL: "https://pspeakapp.firebaseio.com",
+    storageBucket: "",
+};
+const firebaseApp = firebase.initializeApp(config);
+const textRef = firebase.database().ref();
 
 module.exports = React.createClass({
   getInitialState() {
     return ({
-      title: 'PictureSpeak'
+      title: 'PictureSpeak',
+      text: 'Hear your picture!'
+    })
+  },
+
+  componentDidMount() {
+    this.listenForItems(textRef);
+  },
+
+  listenForItems(ref) {
+    console.log('listening for items!');
+    ref.on('value', (snap) => {
+      console.log('recognizing a change!');
+      let text = '';
+      snap.forEach(textSample => {
+        text = textSample.val().text;
+      })
+      this.setState({text});
     })
   },
 
   render() {
     return (
       <View style={styles.container}>
-        {/*<Text>{this.state.title}</Text>*/}
         <Camera
           ref={(cam) => {
             this.camera = cam
@@ -31,6 +58,9 @@ module.exports = React.createClass({
           keepAwake={true}
           aspect={Camera.constants.Aspect.fill}
         >
+          <Text style={styles.text}>
+            {this.state.text}
+          </Text>
           <TouchableOpacity style={styles.capture} onPress={()=>this.takePicture()}>
             <Text style={styles.captureText}>SPEAK</Text>
           </TouchableOpacity>
@@ -49,9 +79,10 @@ module.exports = React.createClass({
             file: 'file',
             filename: 'photo.jpeg',
             base64: image,
-            filetype: 'image/jeg'
+            filetype: 'image/jpeg'
           })
-          fetch('http://localhost:3000/convert', {
+          fetch('https://pspeak2.herokuapp.com/convert', {
+          // fetch('http://localhost:3000/convert', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -88,6 +119,17 @@ const styles = StyleSheet.create({
   captureText: {
     textAlign: 'center',
     color: '#000',
-    padding: 10
+    padding: 10,
+    fontWeight: 'bold',
+    fontSize: 18
+  },
+  text: {
+    color: '#222', //change to black
+    textAlign: 'center',
+    padding: 10,
+    marginBottom: 100,
+    fontSize: 24,
+    backgroundColor: 'transparent'
+    // marginBottom: 50
   }
 })
