@@ -103,6 +103,10 @@ module.exports = React.createClass({
     this.setState({languagesHidden: !this.state.languagesHidden});
   },
 
+  kill() {
+    Speech.stop();
+  },
+
   render() {
     return (
       <View style={styles.container}>
@@ -121,19 +125,19 @@ module.exports = React.createClass({
                 <View></View> :
                 <View>
                   <TouchableOpacity style={styles.sideButton} onPress={() => {this.translate('hi-IN')}}>
-                    <Text>Hindi</Text>
+                    <Text style={styles.text}>Hindi</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.sideButton} onPress={() => {this.translate('ko-KR')}}>
-                    <Text>Korean</Text>
+                    <Text style={styles.text}>Korean</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.sideButton} onPress={() => {this.translate('es-MX')}}>
-                    <Text>Spanish</Text>
+                    <Text style={styles.text}>Spanish</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.sideButton} onPress={() => {this.translate('de')}}>
-                    <Text>German</Text>
+                    <Text style={styles.text}>German</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.sideButton} onPress={() => {this.translate('fr-FR')}}>
-                    <Text>French</Text>
+                    <Text style={styles.text}>French</Text>
                   </TouchableOpacity>
                 </View>
               }
@@ -142,24 +146,29 @@ module.exports = React.createClass({
               </TouchableOpacity>
             </View>
             <TouchableOpacity style={styles.capture} onPress={()=>this.takePicture()}>
-              <Text style={styles.captureText}>SPEAK</Text>
+              <Text style={styles.captureText}>Speak.</Text>
             </TouchableOpacity>
             {this.state.hidden ?
               <View style={[styles.sideButtonA, {opacity: 0}]}>
               </View>
               :
-            <TouchableOpacity
-              style={[styles.sideButtonA, styles.pauseButton]}
-              onPress={
-                this.state.speaking ? () => this._pauseHandler() : () => this._resumeHandler()
-              }
-            >
-              {this.state.speaking ?
-                // initialize as ...
-                <Image source={require('../resources/pause_icon.png')} style={{width: 20, height: 20}}/> :
-                <Image source={require('../resources/play_icon.png')} style={{marginLeft: 2,  paddingLeft: 4, width: 20, height: 20}}/>
-              }
-            </TouchableOpacity>
+              <View>
+                <TouchableOpacity style={[styles.sideButton, styles.pauseButton]} onPress={() => {this.kill()}}>
+                  <Text style={{fontSize: 24}}>✕</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.sideButtonA, styles.pauseButton]}
+                  onPress={
+                    this.state.speaking ? () => this._pauseHandler() : () => this._resumeHandler()
+                  }
+                >
+                  {this.state.speaking ?
+                    // initialize as ...
+                    <Image source={require('../resources/pause_icon.png')} style={{width: 20, height: 20}}/> :
+                    <Image source={require('../resources/play_icon.png')} style={{marginLeft: 2,  paddingLeft: 4, width: 20, height: 20}}/>
+                  }
+                </TouchableOpacity>
+              </View>
             }
           </View>
         </Camera>
@@ -171,8 +180,7 @@ module.exports = React.createClass({
     // check i fnecessary to avoid bugs
     console.log('language', language);
     // Speech = require('react-native-speech');
-    // this._stopHandler();
-    // NativeSpeechSynthesizer.stopSpeakingAtBoundary;
+    this.kill();
     this.setState({original: false});
     let languageCode = 'en';
     if (language == 'fr-FR') {
@@ -262,9 +270,9 @@ const styles = StyleSheet.create({
   captureText: {
     textAlign: 'center',
     color: '#000',
-    // padding: 10,
+    fontFamily: 'Palatino-Italic',
     fontWeight: 'bold',
-    fontSize: 18
+    fontSize: 20
   },
 
   pauseButton: {
@@ -306,7 +314,7 @@ const styles = StyleSheet.create({
     borderColor: '#616161',
     borderWidth: 2,
     opacity: 0.9,
-    marginBottom: 15
+    marginBottom: 7
   },
   sideButtonA:{
     alignItems: 'center',
@@ -326,5 +334,8 @@ const styles = StyleSheet.create({
   sideButtonText: {
     textAlign: 'center',
     fontWeight: 'bold'
+  },
+  text: {
+    fontFamily: 'Palatino-Italic'
   }
 })
